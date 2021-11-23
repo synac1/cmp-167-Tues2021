@@ -2,60 +2,71 @@ import java.util.Scanner;
 
 public class BankOffice {
 	public static void main(String[] args) {
-		System.out.println("Wecome");
 		Scanner input = new Scanner(System.in);
-		
-		System.out.println("Enter a bank name");
+		System.out.println("Welcome");
+		System.out.println("Enter a name for the bank");
 		String bankName = input.nextLine();
-		
-		System.out.println("Enter a bank address");
+		System.out.println("Enter the bank's address");
 		String bankAddress = input.nextLine();
 		
-		
 		Bank bank = new Bank(bankName, bankAddress);
-		System.out.println("New Bank was created");
-		System.out.println(bank);
+		String answer;
 		while(true) {
-			System.out.println("Would you like to create an account?");
-			String answer = input.nextLine().toLowerCase();
-			if (answer.equals("y")||answer.equals("yes") || answer.equals("yep")|| answer.contains("yeah")){
-				System.out.println("Enter a name:");
+			System.out.println("Do you want to open an account?");
+			answer = input.nextLine().toLowerCase();
+			if(answer.equals("y")|| answer.contains("yes")|| answer.contains("yeah")|| answer.contains("yep")) {
+				System.out.println("Enter a name for the owner");
 				answer = input.nextLine();
-				bank.openSavingAccount(answer);
-		
-			}else if (answer.contains("no")) {
+				bank.openCheckingAcct(answer);
+			}else if (answer.equals("no")) {
+				System.out.println("Alright...");
+				break;
+			}
+		}
+		while(true) {
+			System.out.println("Would you like to deposit?");
+			answer = input.nextLine().toLowerCase();
+			if(answer.equals("y")|| answer.contains("yes")|| answer.contains("yeah")|| answer.contains("yep")) {
+				System.out.println("Enter the owner's name");
+				answer = input.nextLine();
+				System.out.println("Enter amount");
+				double amount = input.nextDouble();
+				bank.depositMoney(answer, amount);
 				
-				System.out.println("alright...");
+			}
+			
+			if (answer.equals("no")) {
+				System.out.println("Alright...");
 				break;
 			}
 		}
-		
 		while(true) {
-			System.out.println("Would you like to find an account info");
-			String answer = input.nextLine().toLowerCase();
-			if (answer.equals("y")||answer.equals("yes") || answer.equals("yep")|| answer.contains("yeah")){
-				System.out.println("Enter account owner's name:");
+			System.out.println("Would you like to find an account's info");
+			answer = input.nextLine().toLowerCase();
+			if(answer.equals("y")|| answer.contains("yes")|| answer.contains("yeah")|| answer.contains("yep")) {
+				System.out.println("Enter the owner's name");
 				answer = input.nextLine();
-				bank.getAccountInfo(answer);
-			}else if (answer.contains("no")){
-				System.out.println("alright...");
+				bank.findAccountInfo(answer);
+			}else if (answer.equals("no")) {
+				System.out.println("Alright...");
 				break;
 			}
 		}
 		
+		
 		while(true) {
-			System.out.println("Would you like see all info? ");
-			String answer = input.nextLine().toLowerCase();
-			if(answer.equals("y")||answer.equals("yes") || answer.equals("yep")|| answer.contains("yeah")) {
-				bank.listAllAccounts();
-			}
-			else if (answer.contains("no")) {
-				System.out.println("alright...");
+			System.out.println("Do you want to display all accounts?");
+			answer = input.nextLine().toLowerCase();
+			if(answer.equals("y")|| answer.contains("yes")|| answer.contains("yeah")|| answer.contains("yep")) {
+				bank.displayAllAccts();
+			}else if (answer.equals("no")) {
+				System.out.println("Alright...");
 				break;
 			}
 		}
-		System.out.println("__________________________________________________________");
+		System.out.println("_________________________________________________________________________");
+		
 		System.out.println(bank);
+		
 	}
-
 }
